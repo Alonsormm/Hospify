@@ -11,7 +11,7 @@ class Cola:
     self.head = None
     self.tam = 0
     
-  def push(self,data, prio):
+  def insert(self,data, prio):
     if self.head == None:
       self.head = Node(data,prio)
       self.tam+=1
@@ -41,9 +41,7 @@ class Cola:
     self.head = self.head.sig
     self.tam-=1
     return temp
-
-
-
-cola = Cola()
-
-
+  def isEmpty(self):
+    if self.head ==None:
+      return True
+    return False
