@@ -18,18 +18,17 @@ class Hash(object):
         if(self.listP[hash]==None):
             self.listP[hash] = [p]
         else:
-            listP[hash].append(p)
-    def search(self,p):
-        hash = self.hashing(p.nombre)
+            self.listP[hash].append(p)
+    def search(self,nombre):
+        hash = self.hashing(nombre)
         
         if(self.listP[hash]==None):
             return None
         else:
-            a = self.listP[hash].index(p)
-            if(a == -1):
-                return None
-            else:
-                return self.listP[hash][a]
+            for i in self.listP[hash]:
+                if i.nombre == nombre:
+                    return i
+            return None
     def delete(self,p):
         hash = self.hashing(p.nombre)
         if(self.listP[hash]==None):

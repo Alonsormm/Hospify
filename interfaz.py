@@ -91,20 +91,22 @@ class Botones(GridLayout):
     def __init__(self,**kwargs):
         
         super(Botones, self).__init__(**kwargs)
-        self.cols=4
-
-
+        self.cols=5
         self.add_widget(Button(text='Agregar Persona', on_press=self.agregarPersonaMenu))
         self.add_widget(Button(text='Agregar Doctor', on_press = self.incrementarDoctor))
-        self.lNum= Label(text='Numero actual de doctores: ' + str(dat.NumeroDoctores))
+        self.lNum= Label(text='Numero doctores: ' + str(dat.NumeroDoctores))
         self.add_widget(self.lNum)
         self.add_widget(Button(text='Quitar Doctor', on_press = self.disminuirDoctor))
+        self.add_widget(Button(text='Consultar paciente', on_press = self.consult))
 
+
+    def consult(self, instance):
+        sm.current = 'consultar'
 
 
     def incrementarDoctor(self, instance):
         dat.NumeroDoctores+=1
-        self.lNum.text = 'Numero actual de doctores: ' + str(dat.NumeroDoctores)
+        self.lNum.text = 'Numero doctores: ' + str(dat.NumeroDoctores)
         if(not dat.col.isEmpty()):
             temp = dat.col.pop()
             prin.add_widget(ModuloPaciente(temp))
@@ -115,7 +117,7 @@ class Botones(GridLayout):
             pop.open()
         else:
             dat.NumeroDoctores-=1
-            self.lNum.text = 'Numero actual de doctores: ' + str(dat.NumeroDoctores)
+            self.lNum.text = 'Numero doctores: ' + str(dat.NumeroDoctores)
 
     def agregarPersonaMenu(self,instance):
         sm.current='agregar'
@@ -134,6 +136,26 @@ class Principal(GridLayout):
         self.add_widget(Botones())
         
     
+class ConsultarHash(GridLayout):
+    def __init__(self, **kwargs):
+        super(ConsultarHash, self).__init__(**kwargs)
+        self.cols = 2
+
+        self.nombre = TextInput(hint_text = 'Nombre completo del paciente', multiline=False)
+        self.add_widget(self.nombre)
+        self.add_widget(Button(text='Consultar',on_press= self.con))
+        self.add_widget(Button(text='Regresar', on_press = self.regresar))
+
+    def con(self, instance):
+        a = self.nombre.text
+        temp = dat.hash.search(a)
+        if(temp == None):
+            popup = Popup(title='Alerta!', content=Label(text = "No se encontro la informacion"),size_hint=(None, None), size=(500, 300))
+        else:
+            consultarPersona(temp)
+    def regresar(self,instance):
+        sm.current = 'principal'
+
 
 
 class ModuloPaciente(GridLayout):
@@ -151,13 +173,16 @@ class ModuloPaciente(GridLayout):
         consultarPersona(self.persona)
     def terminarPersona(self,instance):
         prin.remove_widget(self)
+        dat.hash.insert(self.persona)
         dat.NumeroPacientes-=1
+        if not dat.col.isEmpty() and dat.NumeroDoctores >= dat.NumeroPacientes:
+            temp = dat.col.pop()
+            prin.add_widget(ModuloPaciente(temp))
+            
 
 class MyApp(App):
 
     def build(self):
-        
-
         return sm
 
 class Datos(object):
@@ -165,6 +190,7 @@ class Datos(object):
         self.NumeroPacientes= 0
         self.NumeroDoctores = 0
         self.col = Cola()
+        self.hash = Hash()
 
 
 if __name__ == '__main__':
@@ -178,9 +204,16 @@ if __name__ == '__main__':
     screen1 = Screen(name = 'principal')
     screen1.add_widget(prin)
     sm.add_widget(screen1)
+
     screen2 = Screen(name = 'agregar')
     screen2.add_widget(AgregarPersona())
     sm.add_widget(screen2)
+
+    screen3 = Screen(name = 'consultar')
+    a = ConsultarHash()
+    screen3.add_widget(a)
+    sm.add_widget(screen3)
+
     sm.current = 'principal'
 
     MyApp().run()
