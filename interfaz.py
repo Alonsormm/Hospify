@@ -41,16 +41,76 @@ class AgregarPersona(GridLayout):
 
         self.add_widget(Label(text = "Alergias"))
         self.tiAlergias = TextInput(hint_text = 'Alergias', multiline=False)
-        self.add_widget(self.tiAlergias)
-
-        self.add_widget(Label(text = "Sintomas"))
-        self.tiSintomas = TextInput(hint_text = 'Sintomas', multiline=False)
-        self.add_widget(self.tiSintomas)
-
-        self.add_widget(Label(text = "Gravedad"))
-        self.tiGravedad = TextInput(hint_text = 'Gravedad entre 1-10', multiline=False)
-        self.add_widget(self.tiGravedad)
-
+        self.add_widget(self.tiAlermbre = nombre
+        self.edad = edad
+        self.altura = altura
+        self.peso = peso
+        self.tipoS = tipoS
+        self.alergias = alergias
+        self.sintomas = sintomasgias)
+mbre = nombre
+        self.edad = edad
+        self.altura = altura
+        self.peso = peso
+        self.tipoS = tipoS
+        self.alergias = alergias
+        self.sintomas = sintomas
+        self.add_widget(Label(text mbre = nombre
+        self.edad = edad
+        self.altura = altura
+        self.peso = peso
+        self.tipoS = tipoS
+        self.alergias = alergias
+        self.sintomas = sintomas= "Sintomas"))
+        self.tiSintomas = TextInputmbre = nombre
+        self.edad = edad
+        self.altura = altura
+        self.peso = peso
+        self.tipoS = tipoS
+        self.alergias = alergias
+        self.sintomas = sintomas(hint_text = 'Sintomas', multiline=False)
+        self.add_widget(self.tiSintmbre = nombre
+        self.edad = edad
+        self.altura = altura
+        self.peso = peso
+        self.tipoS = tipoS
+        self.alergias = alergias
+        self.sintomas = sintomasomas)
+mbre = nombre
+        self.edad = edad
+        self.altura = altura
+        self.peso = peso
+        self.tipoS = tipoS
+        self.alergias = alergias
+        self.sintomas = sintomas
+        self.add_widget(Label(text mbre = nombre
+        self.edad = edad
+        self.altura = altura
+        self.peso = peso
+        self.tipoS = tipoS
+        self.alergias = alergias
+        self.sintomas = sintomas= "Gravedad"))
+        self.tiGravedad = TextInputmbre = nombre
+        self.edad = edad
+        self.altura = altura
+        self.peso = peso
+        self.tipoS = tipoS
+        self.alergias = alergias
+        self.sintomas = sintomas(hint_text = 'Gravedad entre 1-10', multiline=False)
+        self.add_widget(self.tiGravmbre = nombre
+        self.edad = edad
+        self.altura = altura
+        self.peso = peso
+        self.tipoS = tipoS
+        self.alergias = alergias
+        self.sintomas = sintomasedad)
+mbre = nombre
+        self.edad = edad
+        self.altura = altura
+        self.peso = peso
+        self.tipoS = tipoS
+        self.alergias = alergias
+        self.sintomas = sintomas
 
         self.add_widget(Button(text='Agregar persona', on_press= self.generarPersona))
         self.add_widget(Button(text='Cancelar', on_press = self.noAgregar))
@@ -89,7 +149,6 @@ class AgregarPersona(GridLayout):
 
 class Botones(GridLayout):
     def __init__(self,**kwargs):
-        
         super(Botones, self).__init__(**kwargs)
         self.cols=5
         self.add_widget(Button(text='Agregar Persona', on_press=self.agregarPersonaMenu))
